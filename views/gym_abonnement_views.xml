@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+        <!-- TREE VIEW -->
+        <record id="view_gym_abonnement_tree" model="ir.ui.view">
+            <field name="name">gym.abonnement.tree</field>
+            <field name="model">gym.abonnement</field>
+            <field name="arch" type="xml">
+                <tree string="Abonnements"
+                      decoration-danger="date_fin &lt; context_today()"
+                      decoration-muted="state=='expired'">
+                    <field name="member_id"/>
+                    <field name="type"/>
+                    <field name="date_debut"/>
+                    <field name="date_fin"/>
+                    <field name="prix"/>
+                    <field name="state" widget="statusbar"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- FORM VIEW -->
+        <record id="view_gym_abonnement_form" model="ir.ui.view">
+            <field name="name">gym.abonnement.form</field>
+            <field name="model">gym.abonnement</field>
+            <field name="arch" type="xml">
+                <form string="Abonnement">
+                    <sheet>
+                        <header>
+                            <field name="state" widget="statusbar" statusbar_visible="active,expired"/>
+                        </header>
+                        <group>
+                            <field name="member_id"/>
+                            <field name="type"/>
+                            <field name="prix"/>
+                        </group>
+                        <group>
+                            <field name="date_debut"/>
+                            <field name="date_fin"/>
+                        </group>
+                        <notebook>
+                            <page string="Suivi">
+                                <field name="activity_ids" widget="mail_activity"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids" options="{'open_attachements': True}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record id="action_gym_abonnement" model="ir.actions.act_window">
+            <field name="name">Abonnements</field>
+            <field name="res_model">gym.abonnement</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

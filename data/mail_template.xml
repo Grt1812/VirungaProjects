@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <!-- Mail pour rappel 2 jours avant expiration -->
+        <record id="gym.email_abonnement_expiring" model="mail.template">
+            <field name="name">Abonnement proche de l’expiration</field>
+            <field name="model_id" ref="model_gym_abonnement"/>
+            <field name="email_from">${(user.email or 'no-reply@example.com')}</field>
+            <field name="email_to">${object.member_id.email}</field>
+            <field name="subject"> Rappel : votre abonnement expire bientôt</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Bonjour ${object.member_id.name},</p>
+                <p>Votre abonnement expire bientôt. Merci de le renouveler à temps !</p>
+            ]]></field>
+        </record>
+
+        <!-- Mail pour abonnement expiré -->
+        <record id="gym.email_abonnement_expired" model="mail.template">
+            <field name="name">Abonnement expiré</field>
+            <field name="model_id" ref="model_gym_abonnement"/>
+            <field name="email_from">${(user.email or 'no-reply@example.com')}</field>
+            <field name="email_to">${object.member_id.email}</field>
+            <field name="subject">Votre abonnement est expiré</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+                <p>Bonjour ${object.member_id.name},</p>
+                <p>Votre abonnement a expiré. Veuillez le renouveler pour continuer à profiter de nos services.</p>
+            ]]></field>
+        </record>
+    </data>
+</odoo>

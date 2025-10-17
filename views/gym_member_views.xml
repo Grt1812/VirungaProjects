@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <!-- TREE VIEW -->
+        <record id="view_gym_member_tree" model="ir.ui.view">
+            <field name="name">gym.member.tree</field>
+            <field name="model">gym.member</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des Membres">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="date_inscription"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- FORM VIEW -->
+        <record id="view_gym_member_form" model="ir.ui.view">
+            <field name="name">gym.member.form</field>
+            <field name="model">gym.member</field>
+            <field name="arch" type="xml">
+                <form string="Membre">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="date_inscription"/>
+                            <field name="active"/>
+                        </group>
+                        <notebook>
+                            <page string="Abonnements">
+                                <field name="abonnement_ids">
+                                    <tree>
+                                        <field name="type"/>
+                                        <field name="date_debut"/>
+                                        <field name="date_fin"/>
+                                        <field name="prix"/>
+                                        <field name="state" widget="statusbar"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids" options="{'open_attachements': True}"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record id="action_gym_members" model="ir.actions.act_window">
+            <field name="name">Membres</field>
+            <field name="res_model">gym.member</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

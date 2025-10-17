@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <!-- Menu -->
+        <menuitem id="menu_gym_root"
+                  name="Salle de Sport"
+                  sequence="1"
+                  web_icon="Gym,static/description/icon.png"/>
+
+        <menuitem id="menu_gym_members"
+                  name="Membres"
+                  parent="menu_gym_root"
+                  action="action_gym_members"/>
+
+        <menuitem id="menu_gym_abonnement"
+                  name="Abonnements"
+                  parent="menu_gym_root"
+                  action="action_gym_abonnement"
+                  sequence="3"/>
+
+    </data>
+
+</odoo>
